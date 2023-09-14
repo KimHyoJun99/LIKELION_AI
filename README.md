@@ -1,2 +1,2 @@
-# TIL
-LIKELION AI School
+# LIKELION AI School
+TIL & Project
