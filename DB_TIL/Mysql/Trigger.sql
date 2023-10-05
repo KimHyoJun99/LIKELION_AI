@@ -30,7 +30,16 @@ CREATE TRIGGER trg_deletedMemberTBL
 BEGIN
 	# OLD 테이블의 내용을 백업 테이블에 삽입
 	INSERT INTO deletedMemberTBL
-		VALUES(OLD.memberID, OLD.memberName, OLD.memberAddress, CURATED());
+		VALUES(OLD.memberID, OLD.memberName, OLD.memberAddress, CURDATE());
 END //
 DELIMITER ;
+
+SELECT * FROM memberTBL;
+
+INSERT INTO memberTBL VALUES('Soccer', '흥민', '서울시 서대문구 북가좌동');
+DELETE FROM memberTBL WHERE memberName = '흥민';
+
+SELECT * FROM memberTBL;
+
+SELECT * FROM deletedMemberTBL;
 
