@@ -61,28 +61,28 @@ def output_grade(cur):
 def delete_grade(cur):
     print("3) 삭제")
     delete_name = input("삭제할 이름을 입력하세요: ")
-    cur.execute("DELETE FROM grade WHERE name = %s", [delete_name])
+    cur.execute("DELETE FROM grade WHERE name = ?", [delete_name])
 
 def update_grade(cur):
     print("4) 수정")
     before_name = input("수정할 이름을 입력하세요: ")
-    cur.execute("SELECT * FROM grade WHERE name = %s", [before_name])
+    cur.execute("SELECT * FROM grade WHERE name = ?", [before_name])
     row = cur.fetchone()
     name = row[0]
     kor = row[1]
     eng = row[2]
     math = row[3]
-    update_name = input(f"이름 ({name}: )")
+    update_name = input(f"이름 ({name}): ")
     update_kor = input(f"국어 ({kor}): ")
     update_eng = input(f"영어 ({eng}): ")
     update_math = input(f"수학 ({math}): ")
-    cur.execute("UPDATE grade SET name = %s, %d, %d, %d WHERE name=%s", [update_name, update_kor, update_eng, update_math, name])
+    cur.execute("UPDATE grade SET name = ?, kor = ?, eng = ?, math = ? WHERE name = ?", [update_name, update_kor, update_eng, update_math, name])
 
 def search_grade(cur):
     print("5) 검색")
     search_name = input("이름을 입력하세요: ")
     print(search_name)
-    cur.execute("SELECT * FROM grade WHERE name=%s", [search_name])
+    cur.execute("SELECT * FROM grade WHERE name=?", [search_name])
     row = cur.fetchone()
     name = row[0]
     kor = row[1]
@@ -111,9 +111,9 @@ def sort_grade(cur):
         if row == None:
             break
         name = row[0]
-        kor = row[1]
-        eng = row[2]
-        math = row[3]
+        kor = int(row[1])
+        eng = int(row[2])
+        math = int(row[3])
         kor_grade.append(kor)
         eng_grede.append(eng)
         math_grade.append(math)
