@@ -73,14 +73,15 @@ def update_grade(cur):
     eng = row[2]
     math = row[3]
     update_name = input(f"이름 ({name}: )")
-    update_kor = int(input(f"국어 ({kor}): "))
-    update_eng = int(input(f"영어 ({eng}): "))
-    update_math = int(input(f"수학 ({math}): "))
+    update_kor = input(f"국어 ({kor}): ")
+    update_eng = input(f"영어 ({eng}): ")
+    update_math = input(f"수학 ({math}): ")
     cur.execute("UPDATE grade SET name = %s, %d, %d, %d WHERE name=%s", [update_name, update_kor, update_eng, update_math, name])
 
 def search_grade(cur):
     print("5) 검색")
     search_name = input("이름을 입력하세요: ")
+    print(search_name)
     cur.execute("SELECT * FROM grade WHERE name=%s", [search_name])
     row = cur.fetchone()
     name = row[0]
