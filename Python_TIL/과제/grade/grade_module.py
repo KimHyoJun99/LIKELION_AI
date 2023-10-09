@@ -88,12 +88,12 @@ def search_grade(cur):
     kor = row[1]
     eng = row[2]
     math = row[3]
-    sum = kor + eng + math
+    grade_sum = kor + eng + math
     mean = (kor + eng + math) / 3
     print('='*30)
     print("   이름   국어   영어   수학   총점   평균   ")
     print('='*30)
-    print(f"  {name}   {kor}   {eng}   {math}   {sum}   {mean}   ")
+    print(f"  {name}   {kor}   {eng}   {math}   {grade_sum}   {mean}   ")
 
 def sort_grade(cur):
     print("6) 정렬")
@@ -117,9 +117,9 @@ def sort_grade(cur):
         kor_grade.append(kor)
         eng_grede.append(eng)
         math_grade.append(math)
-        sum = kor + eng + math
+        grade_sum = kor + eng + math
         mean = (kor + eng + math) / 3
-        print(f"  {name}   {kor}   {eng}   {math}   {sum}   {mean}   ")
+        print(f"  {name}   {kor}   {eng}   {math}   {grade_sum}   {mean}   ")
     kor_mean = sum(kor_grade) / len(kor_grade)
     eng_mean = sum(eng_grede) / len(eng_grede)
     math_mean = sum(math_grade) / len(math_grade)
