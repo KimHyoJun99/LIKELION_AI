@@ -15,7 +15,7 @@ class BaseballGame:
                 break
             else:
                 print("게임이 시작되었습니다.")
-                self.answer = random.sample([i for i in range(10)], 3)
+                self.answer = random.sample([i for i in range(10)], 3) 
                 self.count = 0
                 while True:
                     self.compare_answer(self.answer)
