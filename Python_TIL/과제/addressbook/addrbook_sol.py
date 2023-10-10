@@ -36,7 +36,7 @@ def menu_search():
             basic_form()
             print("%(name)10s%(age)10d%(addr)10s" %dt)
             flag_for_search = True
-            break;
+            break
     if flag_for_search == False:
         print("찾는사람이 없습니다")
         
