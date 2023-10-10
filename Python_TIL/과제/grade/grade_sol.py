@@ -3,25 +3,25 @@ import sqlite3
 
 def printMenu():
     print("="*22)
-    print("¼ºÀûµ¥ÀÌÅÍ Ã³¸®")
+    print("ì„±ì ë°ì´í„° ì²˜ë¦¬")
     print("="*22)
-    print("1. ÀÔ·Â", "2. º¸±â", "3. »èÁ¦", "4. ¼öÁ¤", "5. °Ë»ö", "6. Á¤·Ä", "7. ÀúÀå", "8. Á¾·á", sep='\n')
-    return input("¸Ş´º¸¦ ¼±ÅÃÇÏ¼¼¿ä : ")
+    print("1. ì…ë ¥", "2. ë³´ê¸°", "3. ì‚­ì œ", "4. ìˆ˜ì •", "5. ê²€ìƒ‰", "6. ì •ë ¬", "7. ì €ì¥", "8. ì¢…ë£Œ", sep='\n')
+    return input("ë©”ë‰´ë¥¼ ì„ íƒí•˜ì„¸ìš” : ")
 
 def doInput(cur):
     cont = 'y'
     while(cont == 'y'):
-        name    = input("ÀÌ¸§ : ")
-        korean  = input("±¹¾î : ")
-        english = input("¿µ¾î : ")
-        math    = input("¼öÇĞ : ")
+        name    = input("ì´ë¦„ : ")
+        korean  = input("êµ­ì–´ : ")
+        english = input("ì˜ì–´ : ")
+        math    = input("ìˆ˜í•™ : ")
         q = "insert into scores(name, korean, english, math) values(?, ?, ?, ?)"
         cur.execute(q, (name, korean, english, math))
-        cont = input("°è¼Ó ÀÔ·ÂÇÏ½Ã°Ú½À´Ï±î(y/n)?")
+        cont = input("ê³„ì† ì…ë ¥í•˜ì‹œê² ìŠµë‹ˆê¹Œ(y/n)?")
 
 def doShow(cur):
     print("=" * 36)
-    print("%10s%10s%10s%10s%10s%10s"%('ÀÌ¸§','±¹¾î','¿µ¾î','¼öÇĞ','ÃÑÁ¡','Æò±Õ'))
+    print("%10s%10s%10s%10s%10s%10s"%('ì´ë¦„','êµ­ì–´','ì˜ì–´','ìˆ˜í•™','ì´ì ','í‰ê· '))
     print("=" * 36)
     q = "select * from scores"
     cur.execute(q)
@@ -37,39 +37,39 @@ def doShow(cur):
         c += 1
     print("=" * 36)
     if c != 0:
-        print("%7s%8d%6d%6d"%("°ú¸ñº° Æò±Õ",ks/c, es/c, ms/c))
+        print("%7s%8d%6d%6d"%("ê³¼ëª©ë³„ í‰ê· ",ks/c, es/c, ms/c))
 
 def doDelete(cur):
-    name = input("»èÁ¦ÇÒ ÀÌ¸§À» ÀÔ·ÂÇÏ¼¼¿ä : ")
+    name = input("ì‚­ì œí•  ì´ë¦„ì„ ì…ë ¥í•˜ì„¸ìš” : ")
     q = "delete from scores where name=?"
     cur.execute(q, (name,))
 
 def doUpdate(cur):
-    name = input("¼öÁ¤ÇÒ ÀÌ¸§À» ÀÔ·ÂÇÏ¼¼¿ä : ")
+    name = input("ìˆ˜ì •í•  ì´ë¦„ì„ ì…ë ¥í•˜ì„¸ìš” : ")
     q = "select * from scores where name=?"
     cur.execute(q, (name,))
     lst = cur.fetchall()
     if len(lst) != 0 :
-        uname   = input("ÀÌ¸§ (%s): "%(lst[0][0]))
-        korean  = input("±¹¾î (%d): "%(lst[0][1]))
-        english = input("¿µ¾î (%d): "%(lst[0][2]))
-        math    = input("¼öÇĞ (%d): "%(lst[0][3]))
+        uname   = input("ì´ë¦„ (%s): "%(lst[0][0]))
+        korean  = input("êµ­ì–´ (%d): "%(lst[0][1]))
+        english = input("ì˜ì–´ (%d): "%(lst[0][2]))
+        math    = input("ìˆ˜í•™ (%d): "%(lst[0][3]))
         q = "update scores set name=?, korean=?, english=?, math=? where name=?"
         cur.execute(q, (uname, korean, english, math, name))
     
 def doSearch(cur):
-    name = input("ÀÌ¸§À» ÀÔ·ÂÇÏ¼¼¿ä : ")
+    name = input("ì´ë¦„ì„ ì…ë ¥í•˜ì„¸ìš” : ")
     q = "select * from scores where name=?"
     cur.execute(q, (name,))
     print("=" * 36)
-    print("%10s%10s%10s%10s%10s%10s"%('ÀÌ¸§','±¹¾î','¿µ¾î','¼öÇĞ','ÃÑÁ¡','Æò±Õ'))
+    print("%10s%10s%10s%10s%10s%10s"%('ì´ë¦„','êµ­ì–´','ì˜ì–´','ìˆ˜í•™','ì´ì ','í‰ê· '))
     print("=" * 36)
     for n, k, e, m in cur:
         print("%10s%9d%6d%6d%7d%5d"%(n,k,e,m,(k+e+m),(k+e+m)/3))
 
 def doSort(cur):
     print("=" * 36)
-    print("%10s%10s%10s%10s%10s%10s"%('ÀÌ¸§','±¹¾î','¿µ¾î','¼öÇĞ','ÃÑÁ¡','Æò±Õ'))
+    print("%10s%10s%10s%10s%10s%10s"%('ì´ë¦„','êµ­ì–´','ì˜ì–´','ìˆ˜í•™','ì´ì ','í‰ê· '))
     print("=" * 36)
     q = "select * from scores order by name"
     cur.execute(q)
@@ -85,11 +85,11 @@ def doSort(cur):
         c += 1
     print("=" * 36)
     if c != 0:
-        print("%7s%8d%6d%6d"%("°ú¸ñº° Æò±Õ",ks/c, es/c, ms/c))
+        print("%7s%8d%6d%6d"%("ê³¼ëª©ë³„ í‰ê· ",ks/c, es/c, ms/c))
 
 
 def doCommit(cur):
-    yn = input("µ¥ÀÌÅÍº£ÀÌ½º·Î ÀúÀåÇÏ½Ã°Ú½À´Ï±î(y/n)?")
+    yn = input("ë°ì´í„°ë² ì´ìŠ¤ë¡œ ì €ì¥í•˜ì‹œê² ìŠµë‹ˆê¹Œ(y/n)?")
 
 def createTable(cur):
     try :
@@ -115,7 +115,7 @@ def main():
     except Exception as err:
         print("err:", err)
     
-    print("³¡")    
+    print("ë")    
 
 if __name__ == '__main__':
     main()
