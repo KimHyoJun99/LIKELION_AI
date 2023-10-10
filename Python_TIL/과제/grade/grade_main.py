@@ -6,6 +6,7 @@ cur = con.cursor()
 
 def main(con, cur):
     create_table(cur)
+    # dict에 함수 넣어서 사용
     menu_exec = {1: input_grade, 2: output_grade, 3: delete_grade, 4: update_grade, 5: search_grade, 6: sort_grade, 7: save_grade, 8: exit}
     while True:
         menu()
